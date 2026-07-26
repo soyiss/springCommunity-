@@ -51,8 +51,13 @@ public class EmailService {
     // 인증번호를 생성해서 이메일로 발송
     public void 인증번호발송(String email) {
         String 인증번호 = 인증번호생성();
+
+        /*
+        message 는 누구에게 (To) 제목(Subject) 내용(Text)만 담고
+        누가 보내는지(From)은 javascript가 application.yaml에 작성되어있는 정보를 파락한 후 메일 보내기를 시도하는 것
+        */
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(email); //메일 보내는 이메일 표기
+        message.setTo(email); //누구에게 보낼지 설정하는 코드 회원가입 화면에서 사용자가 입력한 이메일주소가 여기로 들어옴
         message.setSubject("[회사이름] 이메일 인증번호 입니다."); // 메일제목
         message.setText("인증번호는 ["+ 인증번호+"] 입니다. 회원가입 화면에 입력해주세요."); // 메일본문
         javaMailSender.send(message);
