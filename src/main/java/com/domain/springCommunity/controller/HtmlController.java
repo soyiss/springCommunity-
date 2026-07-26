@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 /*
 @Controller , @RestController의 경우 build,gradle에서 starter 모듈이 있어야지 사용할 수 있는 어노테이션이다.
@@ -51,9 +53,11 @@ public class HtmlController {
 
     }
 
+
     @PostMapping("/signup")
-    public String signup(Member member){
-        memberService.회원가입기능(member);
+    public String signup(Member member, @RequestParam(value = "profileImg",required = false)
+        MultipartFile profileImg){
+        memberService.회원가입기능(member,profileImg);
         return "redirect:/login";
     }
 
@@ -78,6 +82,11 @@ public class HtmlController {
       // 비밀번호는 굳이 저장하지 않아도 된다.
 
       session.setAttribute("loginMember",loginMember);
+
+      // 로그인 세션(쿠키)의 유효시간을 30분으로 지정
+      // 브라우저에 발급되는 JSESSIONID 쿠키가 30분간 활동이 없으면 자동 만료처리(자동 로그아웃)
+      session.setMaxInactiveInterval(60*30); // 60초를 30번 -> 30분
+
       return "redirect:/";
     }
 

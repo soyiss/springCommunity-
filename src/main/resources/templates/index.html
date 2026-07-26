@@ -8,7 +8,12 @@
     <h1>메인페이지</h1>
     <!-- 세션에 loginMember 가 있으면 로그인 상태로 판단     -->
     <div th:if ="${session.loginMember} !=null">
+        <img th:if ="${session.loginMember.profileImage} !=null"
+             th:src="@{'/uploads/'+${session.loginMember.profileImage}}"
+             width="80" height="80" style="border-radius: 50%;">
+
         <p th:text="${session.loginMember.name}+'님 반갑습니다.'"></p>
+        <a href="/mypage">마이페이지</a>
         <a href="/logout">로그아웃</a>
     </div>
 

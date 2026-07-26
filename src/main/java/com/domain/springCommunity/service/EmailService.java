@@ -9,6 +9,27 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+
+/*
+private final Map<String,String> 인증번호저장소= new HashMap<>();
+
+ Map<String,String> 형태는 서버 전체가 공유하는 메모리 저장소
+ 서버 재 시작 시 날아가고 만료기능이 없다.
+
+ 여러 서버 인스턴스에서는 동작하지 않으며, 실제 운영환경에서는 Redis나 DB에 저장하고, 만료시간(예: 3분)도 함께 관리하는 것이 좋다.
+
+ Redis : 메모리(Ram)에 데이터를 저장하는 매우 빠른 데이터 저장소이다.
+        주로 캐시(Cache) 세션 저장소, 실시간 데이터 처리, 메세지 브로커 등 많이 사용한다.
+        데이터베이스처럼 데이터를 저장할 수 있지만, 데이터를 디스크보다 훨씬 빠른 메모리에 저장하기 때문에 속도가 매우 빠름
+
+ [Redis 주요 용도]
+     1.캐시(Cache) : 자주 사용하는 데이터 저장, 조회 속도를 크게 향상
+     2. 세션 저장: 로그인 정보를 저장, 여러서버가 같은 로그인 정보를 공유할 수 있다.
+     3. 실시간 순위표: 게임랭킹, 인기 검색어, 좋아요 순위
+     4. 메세지 큐(Pub/Sub) : 채팅 , 실시간 알림, 이벤트 전달
+
+*/
+
 @Service
 @RequiredArgsConstructor
 public class EmailService {

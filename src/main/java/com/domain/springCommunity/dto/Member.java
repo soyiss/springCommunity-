@@ -16,6 +16,7 @@ public class Member {
     private String name;
     private String password;
     private String email;
+    private String profileImage; // 저장된 프로필 이미지 파일이름
 
 
 }

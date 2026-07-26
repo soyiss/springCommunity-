@@ -16,7 +16,7 @@
 <div class="container">
 
     <h1>회원가입</h1>
-    <form action="/signup" method="post">
+    <form action="/signup" method="post" enctype="multipart/form-data">
         <div>
             <label> 아이디:
             <input type="text" name="id" required>
@@ -43,6 +43,21 @@
         <div>
             <label> 비밀번호:
                 <input type="password" name="password" required>
+            </label>
+        </div>
+        <div>
+            <label> 프로필 이미지:
+                <!--
+                file 들 중에서 첨부 가능한 파일의 확장자 형태를 설정
+                image 파일을 우선적으로 가져올 수 있도록 허용
+                만약, image 파일 중에서 png 파일만 가져오겠다 하는 경우에는
+                <input type="file" name="profileImage" accept="image/png">
+
+
+                Cannot convert value of type 'org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile'
+                스프링에서 파일 데이터를 가져올때는 Member 필드의 작성한 변수이름과 html name 명칭을 다르게 작성해야된다.
+                -->
+                <input type="file" name="profileImg" accept="image/*">
             </label>
         </div>
         <!--btn = button에서 자음을 축소해서 버튼의 줄임말로 많이 사용-->
