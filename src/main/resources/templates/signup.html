@@ -9,62 +9,80 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
           rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <title>signup</title>
+    <style>
+        .card{
+            background:#fffafc;
+        }
 
+        h1{
+            font-weight:bold;
+        }
+
+        .form-control:focus{
+            border-color:#ff9ecf;
+            box-shadow:0 0 0 .2rem rgba(255,158,207,.25);
+        }
+    </style>
 </head>
-<body>
+<body class="bg-light">
 
-<div class="container">
+<div class="container mt-5" style="max-width:500px;">
 
-    <h1>회원가입</h1>
-    <form action="/signup" method="post" enctype="multipart/form-data">
-        <div>
-            <label> 아이디:
-            <input type="text" name="id" required>
-            </label>
-        </div>
-        <div>
-            <label> 이메일:
-                <input type="email" name="email" id="email" required>
-            </label>
-            <button type="button" onclick="sendEmailCode()">인증번호 발송</button>
-        </div>
-        <div>
-            <label> 인증번호:
-                <input type="text" id="code" >
-            </label>
-            <button type="button" onclick="verifyEmailCode()">인증번호 확인</button>
-            <span id="verifyResult"></span>
-        </div>
-        <div>
-            <label> 이름:
-                <input type="text" name="name" required>
-            </label>
-        </div>
-        <div>
-            <label> 비밀번호:
-                <input type="password" name="password" required>
-            </label>
-        </div>
-        <div>
-            <label> 프로필 이미지:
-                <!--
-                file 들 중에서 첨부 가능한 파일의 확장자 형태를 설정
-                image 파일을 우선적으로 가져올 수 있도록 허용
-                만약, image 파일 중에서 png 파일만 가져오겠다 하는 경우에는
-                <input type="file" name="profileImage" accept="image/png">
+    <h1 class="text-center mb-4 text-primary">🐱 회원가입</h1>
+
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-4">
+            <form action="/signup" method="post" enctype="multipart/form-data">
+                <div  class="mb-3">
+                    <label> 아이디:
+                    <input type="text" class="form-control" name="id" required>
+                    </label>
+                </div>
+                <div  class="mb-3">
+                    <label> 이메일:
+                        <input type="email" class="form-control" name="email" id="email" required>
+                    </label>
+                    <button type="button" class="btn btn-outline-primary" onclick="sendEmailCode()">인증번호 발송</button>
+                </div>
+                <div  class="mb-3">
+                    <label> 인증번호:
+                        <input type="text" class="form-control" id="code" >
+                    </label>
+                    <button type="button"  class="btn btn-outline-primary" onclick="verifyEmailCode()">인증번호 확인</button>
+                    <span id="verifyResult"></span>
+                </div>
+                <div  class="mb-3">
+                    <label> 이름:
+                        <input type="text" class="form-control" name="name" required>
+                    </label>
+                </div>
+                <div class="mb-3">
+                    <label> 비밀번호:
+                        <input type="password" class="form-control" name="password" required>
+                    </label>
+                </div>
+                <div class="mb-3">
+                    <label> 프로필 이미지:
+                        <!--
+                        file 들 중에서 첨부 가능한 파일의 확장자 형태를 설정
+                        image 파일을 우선적으로 가져올 수 있도록 허용
+                        만약, image 파일 중에서 png 파일만 가져오겠다 하는 경우에는
+                        <input type="file" name="profileImage" accept="image/png">
 
 
-                Cannot convert value of type 'org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile'
-                스프링에서 파일 데이터를 가져올때는 Member 필드의 작성한 변수이름과 html name 명칭을 다르게 작성해야된다.
-                -->
-                <input type="file" name="profileImg" accept="image/*">
-            </label>
-        </div>
-        <!--btn = button에서 자음을 축소해서 버튼의 줄임말로 많이 사용-->
-        <button type="reset" class="btn btn-outline-secondary">초기화</button>
-        <button type="submit" class="btn btn-primary">회원가입</button>
+                        Cannot convert value of type 'org.springframework.web.multipart.support.StandardMultipartHttpServletRequest$StandardMultipartFile'
+                        스프링에서 파일 데이터를 가져올때는 Member 필드의 작성한 변수이름과 html name 명칭을 다르게 작성해야된다.
+                        -->
+                        <input type="file"  class="form-control" name="profileImg" accept="image/*">
+                    </label>
+                </div>
+                <!--btn = button에서 자음을 축소해서 버튼의 줄임말로 많이 사용-->
+                <button type="reset" class="btn btn-outline-secondary">초기화</button>
+                <button type="submit" class="btn btn-primary w-100 rounded-3">💖 회원가입</button>
 
-    </form>
+            </form>
+        </div>
+    </div>
 
 
 </div>
