@@ -79,11 +79,40 @@ js는 html 요소를 조작하는 경우가 많아서 body 태그의 각각의 �
 
 -->
 <script>
+
+    /*
+     <input type="email" name="email" id="email" required>
+     <button type="button" onclick="sendEmailCode()">인증번호 발송</button>
+
+     인증번호 발송 버튼을 클릭하면 실행되는 함수이다.
+     onclick = "sendEmailCode()" 로 연결되어있다.
+
+     document.getElementById("email").value;
+        - html에서 id="email" 인 input 태그를 찾아서, 사용자가 입력한 이메일 값을 가져온다.
+        - document 웹 문서에서 id가 email인 요소를 찾는 자바스크립트 문법
+        - .value는 id가 emial인 input에 입력된 값을 의미
+
+     fetch는 자바스크립트에서 서버에 요청을 보내는 함수(=기능)
+        /email/send?email=     백엔드 EmailController에 있는 @PostMapping("/email/send")로 요청을 보내면서
+        email 파라미터에 사용자가 입력한 값을 함께 전달한다.
+
+     encodeURIComponent(email) 이메일 안에 작성되어있는 @, .과 같은 특수문자가 URL 주소에서 깨지지 않도록 안전한 상태로 변환해주는 기능
+
+     {method:"POST"} → GET 이 아니라 POST 식으로 요청한다는 옵션이다.
+     컨트롤러에서도 반드시 @PostMapping 형식으로 맞추어야한다.
+
+     res = 서버가 보낸 데이터가 들어있는 변수
+
+
+    */
+
     function sendEmailCode(){
         const email = document.getElementById("email").value;
         fetch("/email/send?email="+encodeURIComponent(email),{method:"POST"})
-            .then(res => res.text())
-            .then(msg => alert(msg));
+            .then(res => res.text()) // 서버에서 전달한 텍스트를 받아서
+            .then(msg => alert(msg)); // 소비자에서 msg라는 변수에 담아서 백엔드에서 전달한 데이터를 반환하는 것
+        // (alert = 알림창으로 X 또는 확인 버튼을 클릭해야 닫을수있는 작은 팝업창)
+
 
     /*
     백엔드 - 프론트엔드 개발에서 확인할 때
