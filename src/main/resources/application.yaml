@@ -15,7 +15,20 @@ spring:
   sql:
     init:
       mode: always
+  mail:     # 메일을 보내기위한 계정 설정 추가 방법
+    host: smtp.gmail.com
+    port: 587
+    username: naroom0129@gmail.com
+    password: fbsx axnv hhgc wqeb
+    properties:
+      mail:
+        smtp:
+          auth: true
+        starttls:
+          enable:true
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
+
+
