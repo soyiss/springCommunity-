@@ -24,6 +24,24 @@
             </label>
         </div>
         <div>
+            <label> 이메일:
+                <input type="email" name="email" id="email" required>
+            </label>
+            <button type="button" onclick="sendEmailCode()">인증번호 발송</button>
+        </div>
+        <div>
+            <label> 인증번호:
+                <input type="text" id="code" >
+            </label>
+            <button type="button" onclick="verifyEmailCode()">인증번호 확인</button>
+            <span id="verifyResult"></span>
+        </div>
+        <div>
+            <label> 아이디:
+                <input type="text" name="id" required>
+            </label>
+        </div>
+        <div>
             <label> 이름:
                 <input type="text" name="name" required>
             </label>
@@ -66,7 +84,32 @@ js는 html 요소를 조작하는 경우가 많아서 body 태그의 각각의 �
 
 
 -->
+<script>
+    function sendEmailCode(){
+        const email = document.getElementById("email").value;
+        fetch("/email/send?email="+encodeURIComponent(email),{method:"POST"})
+            .then(res => res.text())
+            .then(msg => alert(msg));
+
+
+    }
+    function verifyEmailCode(){
+        const email = document.getElementById("email").value;
+        const code = document.getElementById("code").value;
+        fetch("/email/verify?email="+encodeURIComponent(email)+"&code="+encodeURIComponent(code),{method:"POST"})
+            .then(res => res.text())
+            .then(msg =>  {
+                document.getElementById("verifyResult").innerText =msg
+            });
+
+
+    }
+
+</script>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
+</script>
 </body>
 </html>
