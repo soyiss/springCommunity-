@@ -101,6 +101,22 @@ public class HtmlController {
 
     }
 
+    /**
+     * 마이페이지 - 조회만
+     */
+    @GetMapping("/mypage")
+    public String mypageHtml(HttpSession session) {
+        // 세션에서 loginMember 꺼내기
+        Member loginMember = (Member) session.getAttribute("loginMember");
+
+        // 로그인 안 되어있으면(null) "/login"으로 리다이렉트
+         if (loginMember == null) return "redirect:/login";
+
+        // 로그인 되어있으면 그냥 화면(mypage.html)만 보여주면 됨
+        // (세션에 이미 loginMember가 있으니, html에서 ${session.loginMember} 로 바로 접근 가능)
+        return "mypage";
+    }
+
     // 현재 HttpSession의 경우 cookie 세션을 대신할 대체로 내용이 심오하여 가볍게 로그인 처리 되는것을 보기위한 임시용도이다.
     /*
 

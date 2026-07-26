@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>마이페이지</title>
+</head>
+<body>
+<h1>마이페이지</h1>
+
+    <!-- 프로필 이미지 보여주기
+     조건: session.loginMember.profileImage 가 null이 아닐 때만 img 태그 렌더링
+     참고 (index.html에서 썼던 방식):-->
+     <img th:if="${session.loginMember.profileImage} != null"
+          th:src="@{'/uploads/' + ${session.loginMember.profileImage}}"
+          width="100" height="100" style="border-radius:50%;">
+
+
+     <p>아이디: <span th:text="${session.loginMember.id}"></span></p>
+     <p>이름: <span th:text="${session.loginMember.name}"></span></p>
+     <p>이메일: <span th:text="${session.loginMember.email}"></span></p>
+
+
+<a href="/">메인으로</a>
+</body>
+</html>
