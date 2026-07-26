@@ -7,7 +7,8 @@ DROP TABLE IF EXISTS member;
 CREATE TABLE member(
     id  VARCHAR(50) primary key ,
     name    VARCHAR(50) not null ,
-    password VARCHAR(200) not null
+    password VARCHAR(200) not null,
+    email VARCHAR(100) NOT NULL
 
 
 )

@@ -10,7 +10,6 @@
           rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <title>signup</title>
 
-    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
@@ -35,11 +34,6 @@
             </label>
             <button type="button" onclick="verifyEmailCode()">인증번호 확인</button>
             <span id="verifyResult"></span>
-        </div>
-        <div>
-            <label> 아이디:
-                <input type="text" name="id" required>
-            </label>
         </div>
         <div>
             <label> 이름:
@@ -91,6 +85,12 @@ js는 html 요소를 조작하는 경우가 많아서 body 태그의 각각의 �
             .then(res => res.text())
             .then(msg => alert(msg));
 
+    /*
+    백엔드 - 프론트엔드 개발에서 확인할 때
+    웹 F12 console 창을 열어 어디서 문제가 발생했는지 확인하
+
+
+    */
 
     }
     function verifyEmailCode(){
@@ -113,3 +113,27 @@ js는 html 요소를 조작하는 경우가 많아서 body 태그의 각각의 �
 </script>
 </body>
 </html>
+
+
+
+<!--
+2026-07-26T12:11:22.269+09:00 ERROR 9980 --- [SpringCommunity] [nio-8080-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]
+: Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed
+: org.springframework.mail.MailSendException: Failed messages: org.eclipse.angus.mail.smtp.SMTPSendFailedException
+: 530-5.7.0 Must issue a STARTTLS command first. For more information, go to
+
+530-5.7.0  https://support.google.com/a/answer/3221692 and review RFC 3207
+
+530 5.7.0 specifications. 41be03b00d2f7-cbbb66b2843sm1775925a12.16 - gsmtp
+
+; message exceptions (1) are:
+
+Failed message 1: org.eclipse.angus.mail.smtp.SMTPSendFailedException
+: 530-5.7.0 Must issue a STARTTLS command first. For more information, go to
+
+530-5.7.0  https://support.google.com/a/answer/3221692 and review RFC 3207
+
+530 5.7.0 specifications. 41be03b00d2f7-cbbb66b2843sm1775925a12.16 - gsmtp
+
+] with root cause
+-->
