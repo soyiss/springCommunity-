@@ -1,0 +1,65 @@
+plugins {
+	id 'java'
+// 3.5 라인은 2026년 6월 30일에 오픈소스 지원이 종료됨
+// 지원종료되었으나, 회사에서 사용하는 버전은 맞추어 사용하는 것이 좋다.
+//	id 'org.springframework.boot' version '4.0.7'
+	id 'org.springframework.boot' version '3.5.16'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.domain'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+//		languageVersion = JavaLanguageVersion.of(21)
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	// springboot 3 버전대는 web을 사용
+	// 현재로서는 web을 사용하는 것이 안전하다.
+	// 4버전부터는 모듈이 세분화되면서 webmvc와 webflux 등으로 모듈이 나누어진 상태
+	// webmvc와 web은 하는일이 거의 비슷하다.
+	// webflux 리액티브 방식이며, 스레드를 적게 사용하면서 대량의 동시 요청을 처리할때 사용, 스트리밍이나
+	// 매우 높은 동시성 처리와 같은 작업을 할 때 사용
+	//implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	//implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:4.0.1'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.projectlombok:lombok' // 어노테이션 자체를 코드에서 사용할 수 있게 라이브러리 호출 // 웹사이트에서 가져오는 기능
+
+
+	annotationProcessor 'org.projectlombok:lombok'
+	// 어노테이션을 실제로 코딩에서 읽어서 생성자 /setter / getter 코드 자동으로 만들어주는 도구 실행해줌 / 웹사이트에서 가져온 도구 사용
+
+	// 회원가입 할 때 비밀번호를 암호화 처리해서 저장할 때 사용 하는 모듈을 가져오기 (springsecurity)
+	// 스타터추가로 추가한 모듈은 알아서 동기화 처리가 된다. (새로고침 모양이 안보이는것이 당연)
+	// 하지만, 개발자가 숫자 및 문자를 직접 변경하면 동기화 모양이 나올 것이고 클릭해야지 동기화가 되어서 변경한 버전이나 명칭 사용가능
+	// implementation 'org.springframework.boot:spring-boot-starter-security'
+    // implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+	// 위에는 전문적으로 모든 보안을 세팅하는 방법
+	// 아래는 비밀번호 암호화만 우선적으로 사용하는 방법
+	implementation 'org.springframework.security:spring-security-crypto:6.3.4'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:4.0.1'
+	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.3'
+    testImplementation 'org.springframework.security:spring-security-test'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	// runtimeOnly 'com.h2database:h2'  // sql을 교체하는 방법
+	runtimeOnly 'org.postgresql:postgresql'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
